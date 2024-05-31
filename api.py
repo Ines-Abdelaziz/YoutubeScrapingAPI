@@ -54,4 +54,4 @@ def get_video_data():
     return jsonify({'video_data': Vdata_dict, 'channel_data': Chdata_dict})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000,debug=True)
+    app.run(host="0.0.0.0")
