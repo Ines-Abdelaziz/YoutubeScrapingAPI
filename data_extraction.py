@@ -18,7 +18,6 @@ class VideoData:
     dislike_count: str
     comment_count: str
     topic_categories: set
-    timestamp: str
 @dataclass
 class ChannelData:
     id: str
