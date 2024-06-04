@@ -35,33 +35,54 @@ def video_data(video_id):
 
     # Extract video details
     video = result['result'][0]
-    video_data = VideoData(  
-        video_id= video.get('id', ''),
-        published_at= calculate_datestamp( video.get('publishedTime', '')),
+    video_id= video.get('id', ''),
+    published_at= calculate_datestamp( video.get('publishedTime', '')),
+    if video.get('channel') is not None:
         channel_id= video.get('channel').get('id', ''),
-        title= video.get('title', ''),
+    title= video.get('title', ''),
+    if video.get('descriptionSnippet') is not None:  
         description= video.get('descriptionSnippet')[0].get('text', ''),
+    if video.get('viewCount') is not None:
         view_count= video.get('viewCount').get('text', ''),
-        made_for_kids= 'N/A',
-        like_count='N/A',
-        dislike_count='N/A',
-        comment_count='N/A',
-        topic_categories={''},
+    made_for_kids= 'N/A',
+    like_count='N/A',
+    dislike_count='N/A',
+    comment_count='N/A',
+    topic_categories={''},
+    video_data = VideoData(  
+        video_id=video_id,
+        published_at=published_at,
+        channel_id=channel_id,
+        title=title,
+        description=description,
+        view_count=view_count,
+        made_for_kids=made_for_kids,
+        like_count=like_count,
+        dislike_count=dislike_count,
+        comment_count=comment_count,
+        topic_categories=topic_categories,
        )
     
     
     channel_id=video_data.channel_id
     ChannelSearch = ChannelsSearch(channel_id, limit=1)
     channel=ChannelSearch.result()['result'][0]
-    channel_data=ChannelData(
-        id=channel_id,
-        title=channel.get('title', ''),
+    id=channel_id,
+    title=channel.get('title', ''),
+    if channel.get('descriptionSnippet') is not None:
         description=channel.get('descriptionSnippet')[0].get('text', ''),
-        keywords='',
-        view_count='',
-        subscriber_count=transform_to_bigint(channel.get('subscribers')),
-        #if none type is returned, then the value is set to 0
-        video_count=channel.get('videoCount',0),
+    keywords='',
+    view_count='',
+    subscriber_count=transform_to_bigint(channel.get('subscribers')),
+    video_count=channel.get('videoCount',0),
+    channel_data=ChannelData(
+        id=id,
+        title=title,
+        description=description,
+        keywords=keywords,
+        view_count=view_count,
+        subscriber_count=subscriber_count,
+        video_count=video_count
     )
 
     return video_data,channel_data
