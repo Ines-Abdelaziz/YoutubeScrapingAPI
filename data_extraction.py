@@ -47,7 +47,7 @@ def video_data(video_id):
         dislike_count='N/A',
         comment_count='N/A',
         topic_categories={''},
-        timestamp= datetime.now().isoformat(),)
+       )
     
     
     channel_id=video_data.channel_id

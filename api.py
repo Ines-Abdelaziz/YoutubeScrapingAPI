@@ -23,7 +23,6 @@ def get_video_data():
         dislike_count=videoData.dislike_count,
         comment_count=videoData.comment_count,
         topic_categories=videoData.topic_categories,
-        timestamp=videoData.timestamp
 
     )
 
