@@ -12,34 +12,33 @@ def get_video_data():
     videoData, channelData = video_data(video_id)
 
     Vdata = VideoData(
-        video_id=videoData.video_id,
-        published_at=videoData.published_at,
-        channel_id=videoData.channel_id,
-        title=videoData.title,
-        description=videoData.description,
-        view_count=videoData.view_count,
-        made_for_kids=videoData.made_for_kids,
-        like_count=videoData.like_count,
-        dislike_count=videoData.dislike_count,
-        comment_count=videoData.comment_count,
-        topic_categories=videoData.topic_categories,
+        video_id=videoData.video_id[0],
+        published_at=videoData.published_at[0],
+        channel_id=videoData.channel_id[0],
+        title=videoData.title[0],
+        description=videoData.description[0],
+        view_count=videoData.view_count[0],
+        made_for_kids=videoData.made_for_kids[0],
+        like_count=videoData.like_count[0],
+        dislike_count=videoData.dislike_count[0],
+        comment_count=videoData.comment_count[0],
+        topic_categories=videoData.topic_categories[0],
 
     )
 
     Chdata = ChannelData(
-        id=channelData.id,
-        title=channelData.title,
-        description=channelData.description,
+        id=channelData.id[0],
+        title=channelData.title[0],
+        description=channelData.description[0],
         keywords=list(channelData.keywords),  # Convert set to list
-        view_count=channelData.view_count,
-        subscriber_count=channelData.subscriber_count,
-        video_count=channelData.video_count
+        view_count=channelData.view_count[0],
+        subscriber_count=channelData.subscriber_count[0],
+        video_count=channelData.video_count[0]
     )
 
     # Convert dataclasses to dictionaries
     Vdata_dict = asdict(Vdata)
     Chdata_dict = asdict(Chdata)
-
     # If any field in the dictionaries is a set, convert it to a list
     for key, value in Vdata_dict.items():
         if isinstance(value, set):
