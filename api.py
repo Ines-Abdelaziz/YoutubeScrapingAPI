@@ -1,10 +1,14 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 from dataclasses import asdict
+
 
 # Assuming ChannelData and VideoData are imported from somewhere
 from data_extraction import ChannelData, VideoData, video_data
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 @app.route('/video_data', methods=['get'])
 def get_video_data():
