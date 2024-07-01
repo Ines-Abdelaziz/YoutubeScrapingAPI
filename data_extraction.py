@@ -39,7 +39,7 @@ def video_data(video_id):
     published_at= calculate_datestamp( video.get('publishedTime')),
     if video.get('channel') is not None:
         channel_id= video.get('channel').get('id'),
-    title= video.get('title')[0],
+    title= video.get('title'),
     if video.get('descriptionSnippet') is not None:  
         description= video.get('descriptionSnippet')[0].get('text'),
     if video.get('viewCount') is not None:
