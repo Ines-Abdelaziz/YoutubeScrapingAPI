@@ -81,7 +81,7 @@ def video_data(video_id):
     ChannelSearch = ChannelsSearch(channel_title, limit=1)
     channel=ChannelSearch.result()['result'][0]
     print(channel)
-    id=channel_id,
+    id=channel_id[0],
     title=channel.get('title'),
     if channel.get('descriptionSnippet') is not None:
         description=channel.get('descriptionSnippet')[0].get('text'),
