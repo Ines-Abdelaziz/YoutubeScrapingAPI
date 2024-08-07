@@ -4,6 +4,19 @@ from youtubesearchpython import VideosSearch, ChannelsSearch
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import re
+
+from pytube import Channel
+
+def get_youtube_channel_title(channel_url):
+    try:
+        # Create a Channel object
+        channel = Channel(channel_url)
+        
+        # Return the channel title
+        return channel.channel_name
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
 # Define the video ID
 @dataclass
 class VideoData:
@@ -62,11 +75,12 @@ def video_data(video_id):
         comment_count=comment_count,
         topic_categories=topic_categories,
        )
-    
-    
-    channel_id=video_data.channel_id[0]
-    ChannelSearch = ChannelsSearch(channel_id, limit=1)
+    channel_url = 'https://www.youtube.com/channel/'+channel_id[0]
+    channel_title = get_youtube_channel_title(channel_url)
+    print(channel_title)
+    ChannelSearch = ChannelsSearch(channel_title, limit=1)
     channel=ChannelSearch.result()['result'][0]
+    print(channel)
     id=channel_id,
     title=channel.get('title'),
     if channel.get('descriptionSnippet') is not None:
